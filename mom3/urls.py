@@ -5,6 +5,8 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
 urlpatterns = [
+    url(r'^mom3api/dataproducts$', views.DataProductListView.as_view(), name='dataproduct-list-view'),
+    url(r'^mom3api/dataproducts/(?P<pk>[0-9]+)/$', views.DataProductDetailView.as_view(), name='dataproduct-detail-view'),
     url(r'^mom3api/projects$', views.ProjectListView.as_view(), name='project-list-view'),
     url(r'^mom3api/projects/(?P<pk>[0-9]+)/$', views.ProjectDetailView.as_view(), name='project-detail-view'),
     url(r'^mom3api/mom2objects$', views.Mom2ObjectListView.as_view(), name='mom2object-list-view'),
