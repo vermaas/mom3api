@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import generics
 from django_filters import rest_framework as filters
 
-from .models import Project, Mom2Object, Dataproduct
-from .serializers import ProjectSerializer, Mom2ObjectSerializer, DataproductSerializer
+from .models import Project, Mom2Object, Dataproduct, Mom2Objectstatus
+from .serializers import ProjectSerializer, Mom2ObjectSerializer, DataproductSerializer, Mom2ObjectStatusSerializer
 
 # Create your views here.
 class DataproductFilter(filters.FilterSet):
@@ -23,7 +23,7 @@ class DataProductListView(generics.ListCreateAPIView):
     serializer_class = DataproductSerializer
     filter_class = DataproductFilter
 
-class DataProductDetailView(generics.ListCreateAPIView):
+class DataProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Dataproduct.objects.all()
     serializer_class = DataproductSerializer
 
@@ -31,17 +31,16 @@ class ProjectListView(generics.ListCreateAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
-class ProjectDetailView(generics.ListCreateAPIView):
+class ProjectDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
 class Mom2ObjectFilter(filters.FilterSet):
-    # altapi/ingests?PID=123
-
     class Meta:
         model = Mom2Object
 
         fields = {
+            'id': ['exact', 'icontains'],
             'mom2id': ['exact', 'icontains'],
             'group_id': ['exact', 'icontains'],
             'mom2objecttype': ['exact', 'icontains']
@@ -52,7 +51,10 @@ class Mom2ObjectListView(generics.ListCreateAPIView):
     serializer_class = Mom2ObjectSerializer
     filter_class = Mom2ObjectFilter
 
-class Mom2ObjectDetailView(generics.ListCreateAPIView):
+class Mom2ObjectDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Mom2Object.objects.all()
     serializer_class = Mom2ObjectSerializer
 
+class Mom2ObjectStatusDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Mom2Objectstatus.objects.all()
+    serializer_class = Mom2ObjectStatusSerializer

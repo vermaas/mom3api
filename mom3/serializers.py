@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Dataproduct, Project, Mom2Object
+from .models import Dataproduct, Project, Mom2Object, Mom2Objectstatus
 
 # http://localhost:8000/mom3api/dataproducts
 class DataproductSerializer_version1(serializers.ModelSerializer):
@@ -12,7 +12,6 @@ class DataproductSerializer_version1(serializers.ModelSerializer):
 class DataproductSerializer(serializers.HyperlinkedModelSerializer):
     mom2objectid = serializers.HyperlinkedRelatedField(
         many=False,
-        # read_only=True,
         queryset=Mom2Object.objects.all(),
         view_name='mom2object-detail-view',
         lookup_field='pk',
@@ -25,16 +24,63 @@ class DataproductSerializer(serializers.HyperlinkedModelSerializer):
                   'topology','status','placeholder','status_code','message','mom2objectid')
 
 # http://localhost:8000/mom3api/projects
-class ProjectSerializer(serializers.ModelSerializer):
-
+class ProjectSerializer_version1(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = '__all__'
 
+class ProjectSerializer(serializers.HyperlinkedModelSerializer):
+    mom2objectid = serializers.HyperlinkedRelatedField(
+        many=False,
+        queryset=Mom2Object.objects.all(),
+        view_name='mom2object-detail-view',
+        lookup_field='pk',
+        required=True
+    )
+    class Meta:
+        model = Project
+        fields = ('id','mom2objectid','releasedate','allowtriggers','priority')
+
 # http://localhost:8000/mom3api/mom2objects
-class Mom2ObjectSerializer(serializers.ModelSerializer):
+class Mom2ObjectSerializer_version1(serializers.ModelSerializer):
 
     class Meta:
         model = Mom2Object
         fields = '__all__'
 
+
+# http://localhost:8000/mom3api/mom2objects
+class Mom2ObjectSerializer(serializers.HyperlinkedModelSerializer):
+    parentid = serializers.HyperlinkedRelatedField(
+        many=False,
+        queryset=Mom2Object.objects.all(),
+        view_name='mom2object-detail-view',
+        lookup_field='pk',
+        required=True
+    )
+    ownerprojectid = serializers.HyperlinkedRelatedField(
+        many=False,
+        queryset=Mom2Object.objects.all(),
+        view_name='mom2object-detail-view',
+        lookup_field='pk',
+        required=True
+    )
+    currentstatusid = serializers.HyperlinkedRelatedField(
+        many=False,
+        queryset=Mom2Objectstatus.objects.all(),
+        view_name='mom2objectstatus-detail-view',
+        lookup_field='pk',
+        required=True
+    )
+    class Meta:
+        model = Mom2Object
+        fields = ('id','parentid','indexid','mom2id','mom2objecttype','name','description','ownerprojectid',
+                  'currentstatusid','topology','predecessor','topology_parent','group_id','datasize')
+
+
+
+class Mom2ObjectStatusSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Mom2Objectstatus
+        fields = '__all__'
