@@ -41,6 +41,7 @@ class Mom2ObjectFilter(filters.FilterSet):
 
         fields = {
             'id': ['exact', 'icontains'],
+            'name': ['exact', 'icontains'],
             'mom2id': ['exact', 'icontains'],
             'group_id': ['exact', 'icontains'],
             'mom2objecttype': ['exact', 'icontains']
