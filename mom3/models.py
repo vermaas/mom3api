@@ -596,7 +596,7 @@ class Mom2Object(models.Model):
         db_table = 'mom2object'
 
     def __str__(self):
-        return self.name + ' ('+self.mom2objecttype+')'
+        return str(self.id) + ' ' + self.name + ' ('+self.mom2objecttype+')'
 
 class Mom2Objectdataproduct(models.Model):
     mom2objectid = models.ForeignKey(Mom2Object, models.DO_NOTHING, db_column='mom2objectid', blank=True, null=True)
