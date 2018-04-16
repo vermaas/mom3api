@@ -29,6 +29,7 @@ Now changes made in either MoM, the Django Admin interface, or the REST API, are
 <p align="center">
   <img src="https://github.com/vermaas/mom3api/blob/master/docs/mom3_django_screenshot4.png"/>
 </p>
+
 <p align="center">
   <img src="https://github.com/vermaas/mom3api/blob/master/docs/mom3_django_screenshot5.png"/>
 </p>
