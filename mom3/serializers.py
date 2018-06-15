@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Dataproduct, Project, Mom2Object, Mom2Objectstatus
+from .models import Dataproduct, Project, Mom2Object, Mom2Objectstatus, LofarBeamMeasurement
 
 # http://localhost:8000/mom3api/dataproducts
 class DataproductSerializer_version1(serializers.ModelSerializer):
@@ -83,4 +83,11 @@ class Mom2ObjectStatusSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Mom2Objectstatus
+        fields = '__all__'
+
+
+class LofarBeamMeasurementSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = LofarBeamMeasurement
         fields = '__all__'

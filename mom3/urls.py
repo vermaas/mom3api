@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^mom3api/mom2objects/(?P<pk>[0-9]+)/$', views.Mom2ObjectDetailView.as_view(), name='mom2object-detail-view'),
     url(r'^mom3api/mom2objectstatus/(?P<pk>[0-9]+)/$', views.Mom2ObjectStatusDetailView.as_view(),
         name='mom2objectstatus-detail-view'),
+    url(r'^mom3api/lofarbeams', views.LofarBeamsListView.as_view(), name='lofarbeams-list-view'),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

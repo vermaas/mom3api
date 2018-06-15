@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, pagination
 from django_filters import rest_framework as filters
 
-from .models import Project, Mom2Object, Dataproduct, Mom2Objectstatus
-from .serializers import ProjectSerializer, Mom2ObjectSerializer, DataproductSerializer, Mom2ObjectStatusSerializer
+from .models import Project, Mom2Object, Dataproduct, Mom2Objectstatus, LofarBeamMeasurement
+from .serializers import ProjectSerializer, Mom2ObjectSerializer, DataproductSerializer, Mom2ObjectStatusSerializer, \
+    LofarBeamMeasurementSerializer
 
 # Create your views here.
 class DataproductFilter(filters.FilterSet):
@@ -59,3 +60,12 @@ class Mom2ObjectDetailView(generics.RetrieveUpdateDestroyAPIView):
 class Mom2ObjectStatusDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Mom2Objectstatus.objects.all()
     serializer_class = Mom2ObjectStatusSerializer
+
+
+class LofarBeamsPagination(pagination.PageNumberPagination):
+    page_size = 10000
+
+class LofarBeamsListView(generics.ListCreateAPIView):
+    queryset = LofarBeamMeasurement.objects.all()
+    serializer_class = LofarBeamMeasurementSerializer
+    pagination_class=LofarBeamsPagination
