@@ -39,5 +39,5 @@ Aladin
 This screenshot shows how a frontend archive application (ALTA) can connect the Beams from the MoM REST API to Aladin VO to show all observed fields.
 
 <p align="center">
-  <img src="https://github.com/vermaas/mom3api/blob/master/docs/alta_mom_api.png"/>
+  <img src="https://github.com/vermaas/mom3api/blob/master/docs/alta_mom_api.jpg"/>
 </p>
