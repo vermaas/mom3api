@@ -1,10 +1,13 @@
-from django.shortcuts import render
+
 from rest_framework import generics, pagination
 from django_filters import rest_framework as filters
+from django.http import JsonResponse
 
 from .models import Project, Mom2Object, Dataproduct, Mom2Objectstatus, LofarBeamMeasurement
 from .serializers import ProjectSerializer, Mom2ObjectSerializer, DataproductSerializer, Mom2ObjectStatusSerializer, \
     LofarBeamMeasurementSerializer
+
+from .services import algorithms
 
 # Create your views here.
 class DataproductFilter(filters.FilterSet):
@@ -79,3 +82,23 @@ class LofarBeamsListView(generics.ListCreateAPIView):
     queryset = LofarBeamMeasurement.objects.all()
     serializer_class = LofarBeamMeasurementSerializer
     pagination_class=LofarBeamsPagination
+
+
+# ---------- Command endpoint views ----------
+def getsip(request, mom2dpid = None):
+
+    if not mom2dpid:
+        return JsonResponse({"error": "no mom2dpid given"}, status=400)
+
+    try:
+        sip = algorithms.getsip(mom2dpid)
+        content = {
+            "mom2dpid" : mom2dpid,
+            "sip": sip
+        }
+        return JsonResponse(content)
+
+    except:
+        return JsonResponse(
+            {"error": "could not generate SIP"}, status=404
+        )
