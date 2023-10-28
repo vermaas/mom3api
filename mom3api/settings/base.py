@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
-ALLOWED_HOSTS = [ '127.0.0.1', 'localhost' ]
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -23,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'qgmlbb9a851tpw$uh_m@on(tqf_-&l%oi0i-tjpsiyc@2@^4j#'
+SECRET_KEY = 'abcdefghijklmnopqrstuvwxyz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,16 +81,11 @@ WSGI_APPLICATION = 'mom3api.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'mom3.sqlite3'),
-#    }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'mom3_django',
-        'NAME': 'mom3_clone',
+        'NAME': 'lofar_mom3',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'my_sql_2023_!@#',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
@@ -128,15 +122,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

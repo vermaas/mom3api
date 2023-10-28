@@ -19,18 +19,28 @@ class DataproductFilter(filters.FilterSet):
             'mom2objectid__id': ['exact', 'icontains']
         }
 
-class DataProductListView(generics.ListCreateAPIView):
-    queryset = Dataproduct.objects.all()
+class DataProductListView(generics.ListAPIView):
+    queryset = Dataproduct.objects.all().order_by('id')
     serializer_class = DataproductSerializer
-    filter_class = DataproductFilter
+    filterset_class = DataproductFilter
 
 class DataProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Dataproduct.objects.all()
     serializer_class = DataproductSerializer
 
+class ProjectFilter(filters.FilterSet):
+
+    class Meta:
+        model = Project
+
+        fields = {
+            'id': ['exact', 'icontains'],
+        }
+
 class ProjectListView(generics.ListCreateAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+    filterset_class = ProjectFilter
 
 class ProjectDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Project.objects.all()
@@ -48,10 +58,10 @@ class Mom2ObjectFilter(filters.FilterSet):
             'mom2objecttype': ['exact', 'icontains']
         }
 
-class Mom2ObjectListView(generics.ListCreateAPIView):
+class Mom2ObjectListView(generics.ListAPIView):
     queryset = Mom2Object.objects.all()
     serializer_class = Mom2ObjectSerializer
-    filter_class = Mom2ObjectFilter
+    filterset_class = Mom2ObjectFilter
 
 class Mom2ObjectDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Mom2Object.objects.all()

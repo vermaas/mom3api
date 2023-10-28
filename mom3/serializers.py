@@ -72,6 +72,7 @@ class Mom2ObjectSerializer(serializers.HyperlinkedModelSerializer):
         lookup_field='pk',
         required=True
     )
+
     class Meta:
         model = Mom2Object
         fields = ('id','parentid','indexid','mom2id','mom2objecttype','name','description','ownerprojectid',
