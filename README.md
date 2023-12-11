@@ -41,3 +41,33 @@ This screenshot shows how a frontend archive application (ALTA) can connect the 
 <p align="center">
   <img src="https://github.com/vermaas/mom3api/blob/master/docs/alta_mom_api.jpg"/>
 </p>
+
+----
+## usage
+
+Example: retrieve a dataproduct by its name:
+http://localhost:8000/mom3api/dataproducts/?name=L770733_SAP000_B017_P000_bf.tar
+
+```json
+        {
+            "id": 28215535,
+            "name": "L770733_SAP000_B017_P000_bf.tar",
+            "indexid": 17,
+            "timestamp": "2020-03-04T14:16:52Z",
+            "type": "LOFAR_PULSAR",
+            "released": 0,
+            "exported": 0,
+            "fileformat": "PULP",
+            "archived": 0,
+            "pipelined": 0,
+            "topology": null,
+            "status": null,
+            "placeholder": 0,
+            "status_code": 0,
+            "message": null,
+            "mom2objectid": "http://localhost:8000/mom3api/mom2objects/983655/"
+        }
+
+```
+Which could be used to get the proper SIP like this:
+https://lofar.astron.nl/mom3/interface/importXML2.do?command=GETSIP&id=28215535
