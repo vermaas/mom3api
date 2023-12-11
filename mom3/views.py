@@ -3,11 +3,11 @@ from rest_framework import generics, pagination
 from django_filters import rest_framework as filters
 from django.http import JsonResponse
 
-from .models import Project, Mom2Object, Dataproduct, Mom2Objectstatus, LofarBeamMeasurement
+from .models import Project, Mom2Object, Dataproduct, LofarDataproduct, Mom2Objectstatus, LofarBeamMeasurement
 from .serializers import ProjectSerializer, Mom2ObjectSerializer, DataproductSerializer, Mom2ObjectStatusSerializer, \
-    LofarBeamMeasurementSerializer
+    LofarBeamMeasurementSerializer, LofarDataproductSerializer
 
-from .services import algorithms
+from .services import LofarSIPExportXMLDelegate
 
 # Create your views here.
 class DataproductFilter(filters.FilterSet):
@@ -30,6 +30,28 @@ class DataProductListView(generics.ListAPIView):
 class DataProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Dataproduct.objects.all()
     serializer_class = DataproductSerializer
+
+class LofarDataproductFilter(filters.FilterSet):
+
+    class Meta:
+        model = LofarDataproduct
+
+        fields = {
+            'mom2_dp_id': ['exact', 'icontains'],
+            'group_id': ['exact', 'icontains'],
+            'archive_id': ['exact', 'icontains'],
+            #'dataproductid': ['exact'],
+            #'dataproductid__name': ['exact', 'icontains']
+        }
+
+class LofarDataProductListView(generics.ListAPIView):
+    queryset = LofarDataproduct.objects.all().order_by('id')
+    serializer_class = LofarDataproductSerializer
+    filterset_class = LofarDataproductFilter
+
+class LofarDataProductDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = LofarDataproduct.objects.all()
+    serializer_class = LofarDataproductSerializer
 
 class ProjectFilter(filters.FilterSet):
 
