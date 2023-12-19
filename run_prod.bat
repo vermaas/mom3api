@@ -1,0 +1,1 @@
+python manage.py runserver --settings=mom3api.settings.prod
